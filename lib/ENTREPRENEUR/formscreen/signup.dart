@@ -150,7 +150,7 @@ class _LogaState extends State<Entresignup> {
                       filled: true,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        ),
+                      ),
                       hintText: ("Enter Your Password"),
                       prefixIcon: const Icon(Icons.lock),
                       suffixIcon: GestureDetector(
@@ -249,6 +249,9 @@ class _LogaState extends State<Entresignup> {
                                         functionprovider.enteremail.text,
                                     EnterprenurPassword:
                                         functionprovider.enterpassword.text,
+                                    image: '',
+                                    businesname: '',
+                                    location: '',
                                   ),
                                 );
                               });
@@ -256,7 +259,6 @@ class _LogaState extends State<Entresignup> {
                             }
                           },
                           child: const Text(
-                            
                             "Register",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ));

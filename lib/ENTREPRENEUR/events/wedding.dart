@@ -7,6 +7,7 @@ import 'package:main_project/ENTREPRENEUR/catergories/gifts.dart';
 import 'package:main_project/ENTREPRENEUR/catergories/groomwearaccess.dart';
 import 'package:main_project/ENTREPRENEUR/catergories/jewelleryandaccess.dart.dart';
 import 'package:main_project/ENTREPRENEUR/catergories/makeupartist.dart';
+import 'package:main_project/ENTREPRENEUR/catergories/mehndiartist.dart';
 import 'package:main_project/ENTREPRENEUR/catergories/musicanddancr.dart';
 import 'package:main_project/ENTREPRENEUR/catergories/photographers.dart';
 import 'package:main_project/ENTREPRENEUR/catergories/planninganddecor.dart';
@@ -134,7 +135,7 @@ class _EntreweddingState extends State<Entrewedding> {
                         break;
                       case 9:
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const Entremehndi()));
+                            builder: (context) => const Entremehndipage()));
                         break;
                       case 10:
                         Navigator.of(context).push(MaterialPageRoute(

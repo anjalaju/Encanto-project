@@ -142,7 +142,10 @@ class _LogaState extends State<Entreloginpage> {
                               await instance.signin(
                                   authprovider.enteremail.text,
                                   authprovider.enterpassword.text,
-                                  context);
+                                  context).then((value){
+                                    authprovider.clearcontrl();
+                                  });
+
                             }
                           },
                           child: const Text(
@@ -225,4 +228,6 @@ class _LogaState extends State<Entreloginpage> {
           ),
         ));
   }
+
+  
 }

@@ -109,7 +109,7 @@ class _EntreloginnotificationState extends State<Entreloginnotification> {
                         backgroundColor: MaterialStateProperty.all(
                             const Color.fromARGB(252, 244, 125, 35))),
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Entrebottomnav(indexnum: 0)));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>Entrebottomnav(indexnum: 0)));
                     },
                     child: const Text(
                       "Next",

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:main_project/ENTREPRENEUR/Entrechat.dart';
+import 'package:main_project/model/addProject.dart';
+import 'package:main_project/provider/FunctionProvider.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Entrepweddplan extends StatefulWidget {
@@ -13,166 +16,269 @@ class _EntrepweddplanState extends State<Entrepweddplan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Wedding Planners',
-          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 25),
-        ),
-        backgroundColor: Colors.transparent,
-        bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(1),
-          child: Divider(
-            thickness: 2,
+        appBar: AppBar(
+          title: const Text(
+            'Wedding Planners',
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 25),
+          ),
+          backgroundColor: Colors.transparent,
+          bottom: const PreferredSize(
+            preferredSize: Size.fromHeight(1),
+            child: Divider(
+              thickness: 2,
+              color: Colors.black,
+              height: 1,
+            ),
+          ),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
+            ),
             color: Colors.black,
-            height: 1,
           ),
         ),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-          ),
-          color: Colors.black,
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 30,
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  fillColor: const Color(0xffD9D9D9),
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  hintText: (" Search Planning and Decor..."),
-                  prefixIcon: const Icon(Icons.search),
-                ),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              Container(
-                height: 231,
-                width: 350,
-                child: const Image(
-                  image: AssetImage(
-                    "images/Weddigplanners.jpg",
-                  ),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text("Perinthalmanna,poopalam"),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text("Hosanna Decors and Events"),
-                        IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.favorite))
-                      ],
-                    ),
-                    const Text("  Plannig Fee "),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.currency_rupee,
-                          size: 20,
-                        ),
-                        Text(
-                          "750000-100000 ",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    OutlinedButton(
-                        style: ButtonStyle(
-                            foregroundColor: MaterialStateProperty.all(
-                                const Color(0xffFF004D)),
-                            textStyle: MaterialStateProperty.all(
-                                const TextStyle(
-                                    fontWeight: FontWeight.w600, fontSize: 14)),
-                            minimumSize:
-                                MaterialStateProperty.all(const Size(250, 50)),
-                            side: MaterialStateProperty.all(
-                                const BorderSide(color: Color(0xffFF004D))),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)))),
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => EntreChatpage(
-                              name: 'Wedding Planners',
-                            ),
-                          ));
-                        },
-                        child: const Row(
+        body: Consumer<FunctionProvider>(
+          builder: (context, instance, child) {
+            return StreamBuilder(
+              stream: instance.getEventproject(
+                  'Planning And Dcro', 'Wedding planeers'),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                List<EventModel> list = [];
+                list = snapshot.data!.docs.map((e) {
+                  return EventModel.fromJsone(e.data() as Map<String, dynamic>);
+                }).toList();
+                if (snapshot.hasData) {
+                  return list.isEmpty
+                      ? Center(
+                          child: Text('no data'),
+                        )
+                      : SingleChildScrollView(
+                          child: Column(
                           children: [
-                            Icon(Icons.message),
-                            SizedBox(
-                              width: 20,
+                            TextField(
+                              decoration: InputDecoration(
+                                fillColor: const Color(0xffD9D9D9),
+                                filled: true,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                hintText: ("  Search Venues..."),
+                                prefixIcon: const Icon(Icons.search),
+                              ),
                             ),
-                            Text("Message"),
+                            ListView.separated(
+                              physics: const BouncingScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: list.length,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {},
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Column(
+                                      children: [
+                                        const SizedBox(
+                                          height: 30,
+                                        ),
+                                        Container(
+                                          height: 231,
+                                          width: 350,
+                                          decoration: BoxDecoration(
+                                              border: Border.all()),
+                                          child: list[index].Image.isEmpty
+                                              ? const Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                )
+                                              : Image(
+                                                  image: NetworkImage(
+                                                    list[index].Image,
+                                                  ),
+                                                  fit: BoxFit.cover,
+                                                  errorBuilder: (context, error,
+                                                      stackTrace) {
+                                                    return const Icon(
+                                                        Icons.error);
+                                                  },
+                                                ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20),
+                                          child: Column(
+                                            // mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(list[index].eventName),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(list[index].eventPlace),
+                                                  IconButton(
+                                                      onPressed: () async {
+                                                        // await _showMyDialog(
+                                                        //   list[index],
+                                                        // );
+                                                      },
+                                                      icon: const Icon(
+                                                          Icons.delete))
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(list[index].discription),
+                                                  IconButton(
+                                                      onPressed: () {
+                                                        // editbootmsheet(
+                                                        //     list[index]);
+                                                      },
+                                                      icon: const Icon(
+                                                          Icons.edit))
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  const Icon(
+                                                    Icons.currency_rupee,
+                                                    size: 20,
+                                                  ),
+                                                  Text(
+                                                    list[index]
+                                                        .startingPriceFrom,
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 18),
+                                                  ),
+                                                ],
+                                              ),
+                                              // Text("500-700 max")
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              OutlinedButton(
+                                                  style: ButtonStyle(
+                                                      foregroundColor:
+                                                          MaterialStateProperty.all(
+                                                              const Color(
+                                                                  0xffFF004D)),
+                                                      textStyle:
+                                                          MaterialStateProperty.all(
+                                                              const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize:
+                                                                      14)),
+                                                      minimumSize: MaterialStateProperty.all(
+                                                          const Size(250, 50)),
+                                                      side: MaterialStateProperty.all(
+                                                          const BorderSide(
+                                                              color:
+                                                                  Color(0xffFF004D))),
+                                                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)))),
+                                                  onPressed: () {
+                                                    Navigator.of(context)
+                                                        .push(MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          EntreChatpage(
+                                                        name: 'Banquet Halls',
+                                                      ),
+                                                    ));
+                                                  },
+                                                  child: const Row(
+                                                    children: [
+                                                      Icon(Icons.message),
+                                                      SizedBox(
+                                                        width: 20,
+                                                      ),
+                                                      Text("Message"),
+                                                    ],
+                                                  )),
+                                              OutlinedButton(
+                                                style: ButtonStyle(
+                                                  foregroundColor:
+                                                      MaterialStateProperty.all(
+                                                          const Color(
+                                                              0xff63C336)),
+                                                  textStyle:
+                                                      MaterialStateProperty.all(
+                                                    const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 14),
+                                                  ),
+                                                  minimumSize:
+                                                      MaterialStateProperty.all(
+                                                          const Size(30, 50)),
+                                                  shape:
+                                                      MaterialStateProperty.all(
+                                                    const CircleBorder(),
+                                                  ),
+                                                  side:
+                                                      MaterialStateProperty.all(
+                                                    const BorderSide(
+                                                        color:
+                                                            Color(0xff63C336)),
+                                                  ),
+                                                ),
+                                                onPressed: () {
+                                                  _makePhoneCall(
+                                                      list[index].phonenumber);
+                                                },
+                                                child: const Row(
+                                                  children: [
+                                                    Icon(Icons.call),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return const SizedBox(
+                                  height: 40,
+                                );
+                              },
+                            ),
                           ],
-                        )),
-                    OutlinedButton(
-                      style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all(const Color(0xff63C336)),
-                        textStyle: MaterialStateProperty.all(
-                          const TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 14),
-                        ),
-                        minimumSize:
-                            MaterialStateProperty.all(const Size(30, 50)),
-                        shape: MaterialStateProperty.all(
-                          const CircleBorder(),
-                        ),
-                        side: MaterialStateProperty.all(
-                          const BorderSide(color: Color(0xff63C336)),
-                        ),
-                      ),
-                      onPressed: () {
-                        _makePhoneCall('7025053483');
-                      },
-                      child: const Row(
-                        children: [
-                          Icon(Icons.call),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+                        ));
+                }
+                return Container();
+              },
+            );
+          },
+        ));
   }
 
   void _makePhoneCall(String phoneNumber) async {

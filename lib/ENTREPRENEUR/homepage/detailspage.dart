@@ -90,6 +90,8 @@ class _LogaState extends State<Entredetailspage> {
 
   String? producturl;
 
+  final formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final authprvdr = Provider.of<AuthProvider>(context);
@@ -118,221 +120,288 @@ class _LogaState extends State<Entredetailspage> {
             color: Colors.black,
           ),
         ),
-        backgroundColor: Color(0xffF9F8C9),
+        backgroundColor: const Color(0xffF9F8C9),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 30),
-                const Text("Bussiness name"),
-                const SizedBox(height: 7),
-                TextField(
-                  controller: authprvdr.eventname,
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+            child: Form(
+              key: formkey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 30),
+                  const Text(
+                    "Bussiness name",
+                    style: TextStyle(fontWeight: FontWeight.w700),
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                const Text("Place"),
-                const SizedBox(height: 7),
-                TextField(
-                  controller: authprvdr.eventplace,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-                DropdownButtonFormField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                  ),
-                  items: Eventlist.map((e) {
-                    return DropdownMenuItem(
-                      value: e.toString(),
-                      child: Text(e),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      selectedMainCategory = value;
-                      selectedSubCategory = null;
-                    });
-                  },
-                  value: selectedMainCategory,
-                ),
-                SizedBox(
-                  height: 50,
-                ),
-                DropdownButtonFormField<String>(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                  ),
-                  items: selectedMainCategory != null
-                      ? subcategory[selectedMainCategory]!.map((e) {
-                          return DropdownMenuItem(
-                            value: e.toString(),
-                            child: Text(e),
-                          );
-                        }).toList()
-                      : [],
-                  onChanged: (value) {
-                    setState(() {
-                      selectedSubCategory = value;
-                    });
-                  },
-                  value: selectedSubCategory,
-                  hint: Text('selectedsub'),
-                ),
-                SizedBox(height: 10),
-                Text("Short discription"),
-                TextField(
-                  controller: authprvdr.eventdiscription,
-                  maxLines: 5,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                const Text("Starting Price from"),
-                const SizedBox(height: 7),
-                TextField(
-                  controller: authprvdr.eventprice,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 7),
-                TextField(
-                  controller: authprvdr.phonenumber,
-                  keyboardType: TextInputType.emailAddress,
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(10),
-                  ],
-                  decoration: InputDecoration(
-                    hintText: 'phonenumber',
-                    fillColor: Colors.white,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text("Image of product"),
-                SizedBox(height: 7),
-                Padding(
-                  padding: const EdgeInsets.only(right: 180),
-                  child: InkWell(
-                    onTap: () {
-                      _showImagePickerBottomSheet(context);
-                    },
-                    child: Container(
-                      height: 130,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(
-                            15), // Adjust the radius as needed
+                  const SizedBox(height: 7),
+                  TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    controller: authprvdr.eventname,
+                    keyboardType: TextInputType.name,
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      child: _imageFile != null
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(
-                                  15), // Adjust the radius as needed
-                              child: Image.file(
-                                _imageFile!,
-                                fit: BoxFit.fill,
+                    ),
+                    validator: (value) {
+                      if(value!.isEmpty ){
+                        return 'enter value';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    "Place",
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 7),
+                  TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+
+                    controller: authprvdr.eventplace,
+                    // keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                     validator: (value) {
+                      if(value!.isEmpty ){
+                        return 'enter value';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  DropdownButtonFormField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                    ),
+                    items: Eventlist.map((e) {
+                      return DropdownMenuItem(
+                        value: e.toString(),
+                        child: Text(e),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedMainCategory = value;
+                        selectedSubCategory = null;
+                      });
+                    },
+                    value: selectedMainCategory,
+                    hint: const Text('select category'),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  DropdownButtonFormField<String>(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                    ),
+                    items: selectedMainCategory != null
+                        ? subcategory[selectedMainCategory]!.map((e) {
+                            return DropdownMenuItem(
+                              value: e.toString(),
+                              child: Text(e),
+                            );
+                          }).toList()
+                        : [],
+                    onChanged: (value) {
+                      setState(() {
+                        selectedSubCategory = value;
+                      });
+                    },
+                    value: selectedSubCategory,
+                    hint: const Text('select subcategory'),
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    "Short discription",
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                  TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+
+                    controller: authprvdr.eventdiscription,
+                    maxLines: 5,
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                     validator: (value) {
+                      if(value!.isEmpty ){
+                        return 'enter value';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    "Starting Price from",
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 7),
+                  TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+
+                    controller: authprvdr.eventprice,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                     validator: (value) {
+                      if(value!.isEmpty ){
+                        return 'enter value';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    "Phone Number",
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 7),
+                  TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+
+                    controller: authprvdr.phonenumber,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(10),
+                    ],
+                    decoration: InputDecoration(
+                      // hintText: 'phonenumber',
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                     validator: (value) {
+                      if(value!.isEmpty ){
+                        return 'enter value';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    "Image of product",
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 7),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 180),
+                    child: InkWell(
+                      onTap: () {
+                        _showImagePickerBottomSheet(context);
+                      },
+                      child: Container(
+                        height: 130,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          border: Border.all(),
+                          borderRadius: BorderRadius.circular(
+                              15), // Adjust the radius as needed
+                        ),
+                        child: _imageFile != null
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                    15), // Adjust the radius as needed
+                                child: Image.file(
+                                  _imageFile!,
+                                  fit: BoxFit.fill,
+                                ),
+                              )
+                            : const Icon(
+                                Icons.add,
+                                size: 40,
                               ),
-                            )
-                          : Icon(
-                              Icons.add,
-                              size: 40,
-                            ),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Center(child: Consumer<FunctionProvider>(
-                  builder: (context, instance, child) {
-                    return ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadiusDirectional.circular(20))),
-                            minimumSize:
-                                MaterialStateProperty.all(const Size(300, 50)),
-                            foregroundColor:
-                                MaterialStateProperty.all(Colors.white),
-                            backgroundColor:
-                                MaterialStateProperty.all(Color(0xffFF4141))),
-                        onPressed: () async {
-                          if (producturl != null) {
-                            await instance
-                                .setEvent(
-                              EventModel(
-                                eventName: authprvdr.eventname.text,
-                                eventPlace: authprvdr.eventplace.text,
-                                eventmainCategory:
-                                    selectedMainCategory.toString(),
-                                eventSubcategory:
-                                    selectedSubCategory.toString(),
-                                enterprenurid: auth.currentUser!.uid,
-                                Image: producturl.toString(),
-                                discription: authprvdr.eventdiscription.text,
-                                startingPriceFrom: authprvdr.eventprice.text,
-                                phonenumber: authprvdr.phonenumber.text,
-                              ),
-                            )
-                                .then((value) {
-                              SuccesToast(context, 'add event succes');
-
-                              authprvdr.clearcontrl();
-                            });
-                          } else {
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Center(child: Consumer<FunctionProvider>(
+                    builder: (context, instance, child) {
+                      return ElevatedButton(
+                          style: ButtonStyle(
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadiusDirectional.circular(20))),
+                              minimumSize:
+                                  MaterialStateProperty.all(const Size(300, 50)),
+                              foregroundColor:
+                                  MaterialStateProperty.all(Colors.white),
+                              backgroundColor: MaterialStateProperty.all(
+                                  const Color(0xffFF4141))),
+                          onPressed: () async {
+                            if(formkey.currentState!.validate()){
+                              if (producturl != null &&  selectedMainCategory != null&& selectedSubCategory!= null) {
+                              await instance
+                                  .setEvent(
+                                EventModel(
+                                  eventName: authprvdr.eventname.text,
+                                  eventPlace: authprvdr.eventplace.text,
+                                  eventmainCategory:
+                                      selectedMainCategory.toString(),
+                                  eventSubcategory:
+                                      selectedSubCategory.toString(),
+                                  enterprenurid: auth.currentUser!.uid,
+                                  Image: producturl.toString(),
+                                  discription: authprvdr.eventdiscription.text,
+                                  startingPriceFrom: authprvdr.eventprice.text,
+                                  phonenumber: authprvdr.phonenumber.text,
+                                ),
+                              )
+                                  .then((value) {
+                                SuccesToast(context, 'add event succes');
+              
+                                authprvdr.clearcontrl();
+                              });
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('plase wait ')));
+                            }
                             ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('plase wait ')));
-                          }
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('add succes ')));
-                        },
-                        child: const Text(
-                          "Submit",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ));
-                  },
-                )),
-                SizedBox(
-                  height: 60,
-                )
-              ],
+                                const SnackBar(content: Text('add succes ')));
+                            }
+                          },
+                          child: const Text(
+                            "Submit",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ));
+                    },
+                  )),
+                  const SizedBox(
+                    height: 60,
+                  )
+                ],
+              ),
             ),
           ),
         ));
@@ -371,27 +440,42 @@ class _LogaState extends State<Entredetailspage> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.camera,
                   color: Colors.indigo,
                 ),
-                title: Text(
+                title: const Text(
                   'Take a photo',
                   style: TextStyle(color: Colors.indigo),
                 ),
                 onTap: () async {
-                  await _pickImage(ImageSource.camera);
-                  Navigator.pop(context);
+                  await _pickImage(ImageSource.camera).then((value) async {
+                    SettableMetadata metadata =
+                        SettableMetadata(contentType: 'image/jpeg');
+                    final currenttime = TimeOfDay.now();
+                    UploadTask uploadTask = FirebaseStorage.instance
+                        .ref()
+                        .child('eventimage/$currenttime')
+                        .putFile(_imageFile!, metadata);
+                    TaskSnapshot snapshot = await uploadTask;
+                    await snapshot.ref.getDownloadURL().then((value) {
+                      setState(() {
+                        producturl = value;
+                         Navigator.pop(context);
+                      });
+                    });
+                  });
+                 
                 },
               ),
               ListTile(
-                leading: Icon(Icons.photo_library, color: Colors.indigo),
-                title: Text(
+                leading: const Icon(Icons.photo_library, color: Colors.indigo),
+                title: const Text(
                   'Choose from gallery',
                   style: TextStyle(color: Colors.indigo),
                 ),

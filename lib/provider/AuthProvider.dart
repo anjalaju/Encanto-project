@@ -50,8 +50,9 @@ class AuthProvider with ChangeNotifier {
       auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => Entresuccessfull()));
+         
+        Navigator.pushAndRemoveUntil(context, 
+            MaterialPageRoute(builder: (context) => const Entresuccessfull()),(route) => false,);
         clearcontrl();
       });
     } on FirebaseException catch (e) {
@@ -67,7 +68,7 @@ class AuthProvider with ChangeNotifier {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Entreloginnotification(),
+            builder: (context) => const Entreloginnotification(),
           ),
         );
         SuccesToast(context, 'Loggin succes');

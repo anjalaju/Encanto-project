@@ -15,8 +15,8 @@ class _EntresuccessfullState extends State<Entresuccessfull> {
     super.initState();
     // Wait for 3 seconds and then navigate to the login page
     Timer(const Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const Entreloginnotification()),
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const Entreloginnotification()),(route) => false,
       );
     });
   }

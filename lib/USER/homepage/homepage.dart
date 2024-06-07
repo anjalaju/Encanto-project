@@ -14,6 +14,7 @@ import 'package:main_project/USER/Drawer/complaint.dart';
 import 'package:main_project/USER/events/eventpage.dart';
 import 'package:main_project/USER/Drawer/shotlist.dart';
 import 'package:main_project/USER/formscreen/welcome.dart';
+import 'package:main_project/usertype.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class homepage extends StatefulWidget {
@@ -396,7 +397,7 @@ class _homepageState extends State<homepage> {
                                                   .pushAndRemoveUntil(
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        const welcome()),
+                                                        const UserType()),
                                                 (Route<dynamic> route) => false,
                                               ));
       

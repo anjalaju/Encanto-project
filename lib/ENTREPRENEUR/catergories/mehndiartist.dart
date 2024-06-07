@@ -33,7 +33,7 @@ class _EntremehndipageState extends State<Entremehndipage> {
 
       appBar: AppBar(
         title: const Text(
-          'Makeup artist',
+          'Mehndi artist',
           style: TextStyle(fontWeight: FontWeight.w500, fontSize: 25),
         ),
         backgroundColor: Colors.transparent,

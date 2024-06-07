@@ -47,6 +47,7 @@ class EventModel {
       discription: jsone['eventdiscription'],
       startingPriceFrom: jsone['startingprice'],
       phonenumber: jsone['phonenumber'],
+      id: jsone['id'],
     );
   }
 }

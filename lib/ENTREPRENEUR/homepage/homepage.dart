@@ -87,11 +87,7 @@ class _EntreHomeState extends State<EntreHome> {
                                                 ))),
                                         ElevatedButton(
                                             onPressed: () {
-                                              Navigator.of(context)
-                                                  .push(MaterialPageRoute(
-                                                builder: (context) =>
-                                                    EntrewelcomeEnterpRenur(),
-                                              ));
+                                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => EntrewelcomeEnterpRenur(),), (route) => false);
                                             },
                                             child: const Text(
                                               "Yes",

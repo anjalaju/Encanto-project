@@ -107,7 +107,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:main_project/Intropage.dart/swipee.dart';
-import 'package:main_project/USER/homepage/bottomnav.dart';
+import 'package:main_project/view/USER/homepage/bottomnav.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashUserFirst extends StatefulWidget {

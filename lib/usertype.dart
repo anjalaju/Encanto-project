@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:main_project/ENTREPRENEUR/formscreen/welcome.dart';
+import 'package:main_project/view/ENTREPRENEUR/formscreen/welcome.dart';
 import 'package:main_project/Intropage.dart/Swipe.dart';
 import 'package:main_project/utils/String.dart';
+import 'package:main_project/view/admin/drawer.dart';
 
 class UserType extends StatelessWidget {
   const UserType({super.key});
@@ -32,22 +33,33 @@ class UserType extends StatelessWidget {
                 Column(
                   children: [
                     if(kIsWeb)
-                    Container(
-                      decoration: BoxDecoration(
-                          color: const Color(0xffFF004D),
-                          borderRadius: BorderRadius.circular(30)),
-                      alignment: Alignment.center,
-                      // width: Helper.W(context) * .250,
-                      // height: Helper.h(context) * .050,
-                      width: Helper.W(context) * .500,
-                      height: Helper.h(context) * .050,
-
-                      child: const Text(
-                        'Admin',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20,
-                            color: Colors.white),
+                    GestureDetector(
+                      onTap: (){
+                        
+                         Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>   Drawerpage(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: const Color(0xffFF004D),
+                            borderRadius: BorderRadius.circular(30)),
+                        alignment: Alignment.center,
+                        // width: Helper.W(context) * .250,
+                        // height: Helper.h(context) * .050,
+                        width: Helper.W(context) * .500,
+                        height: Helper.h(context) * .050,
+                      
+                        child: const Text(
+                          'Admin',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20,
+                              color: Colors.white),
+                        ),
                       ),
                     ),
                     SizedBox(

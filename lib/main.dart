@@ -1,10 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:main_project/Bussines_logic/firebase_options.dart';
-import 'package:main_project/ENTREPRENEUR/homepage/bottomnav.dart';
+import 'package:main_project/controller/AuthProvider.dart';
+
 import 'package:main_project/Intropage.dart/Swipe.dart';
-import 'package:main_project/provider/AuthProvider.dart';
-import 'package:main_project/provider/FunctionProvider.dart';
+import 'package:main_project/controller/FunctionProvider.dart';
+import 'package:main_project/controller/paymentcontroller.dart';
+
+
 import 'package:main_project/usertype.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +28,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => AuthProvider(),
         ),
-        ChangeNotifierProvider(create: (_) => FunctionProvider())
+        ChangeNotifierProvider(create: (_) => FunctionProvider()),
+        ChangeNotifierProvider(create: (_)=>PaymentController())
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

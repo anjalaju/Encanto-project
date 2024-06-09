@@ -218,7 +218,7 @@ class _BankquethallState extends State<Bankquethall> {
                                         ),
                                       ],
                                     ),
-                                    Text("500-700 max")
+                                    // Text("500-700 max")
                                   ],
                                 ),
                               ),

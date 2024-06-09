@@ -2,13 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:main_project/Bussines_logic/firebase_options.dart';
 import 'package:main_project/controller/AuthProvider.dart';
-
-import 'package:main_project/Intropage.dart/Swipe.dart';
 import 'package:main_project/controller/FunctionProvider.dart';
 import 'package:main_project/controller/paymentcontroller.dart';
-
-
 import 'package:main_project/usertype.dart';
+import 'package:main_project/view/ENTREPRENEUR/homepage/Entrepage.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -29,11 +26,14 @@ class MyApp extends StatelessWidget {
           create: (_) => AuthProvider(),
         ),
         ChangeNotifierProvider(create: (_) => FunctionProvider()),
-        ChangeNotifierProvider(create: (_)=>PaymentController())
+        ChangeNotifierProvider(create: (_) => PaymentController())
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: UserType(),
+        // home: Entreentreprenuer(),
+        // home: Newchatpage(),
+        // home: Chatpage(name: "anjal",)
       ),
     );
   }

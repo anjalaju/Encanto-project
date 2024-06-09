@@ -34,65 +34,73 @@ class _EntreloginnotificationState extends State<Entreloginnotification> {
               const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  height: 73,
-                  width: 372,
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Alert of new messages from",
-                          style: TextStyle(fontSize: 20)),
-                      Text("suppliers you’ve contacted.",
-                          style: TextStyle(fontSize: 20))
-                    ],
+                child: Center(
+                  child: Container(
+                    height: 73,
+                    width: 372,
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Alert of new messages from",
+                            style: TextStyle(fontSize: 20)),
+                        Text("suppliers you’ve contacted.",
+                            style: TextStyle(fontSize: 20))
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 235, 229, 213),
+                        borderRadius: BorderRadius.circular(20)),
                   ),
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 235, 229, 213),
-                      borderRadius: BorderRadius.circular(20)),
                 ),
               ),
               const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  height: 73,
-                  width: 372,
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Epic offers for your events..",
-                          style: TextStyle(fontSize: 20))
-                    ],
+                child: Center(
+                  child: Container(
+                    height: 73,
+                    width: 372,
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Epic offers for your events..",
+                            style: TextStyle(fontSize: 20))
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 235, 229, 213),
+                        borderRadius: BorderRadius.circular(20)),
                   ),
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 235, 229, 213),
-                      borderRadius: BorderRadius.circular(20)),
                 ),
               ),
               const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  height: 73,
-                  width: 372,
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Notifications of news and",
-                          style: TextStyle(fontSize: 20)),
-                      Text("updates in the app.",
-                          style: TextStyle(fontSize: 20))
-                    ],
+                child: Center(
+                  child: Container(
+                    height: 73,
+                    width: 372,
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Notifications of news and",
+                            style: TextStyle(fontSize: 20)),
+                        Text("updates in the app.",
+                            style: TextStyle(fontSize: 20))
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 235, 229, 213),
+                        borderRadius: BorderRadius.circular(20)),
                   ),
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 235, 229, 213),
-                      borderRadius: BorderRadius.circular(20)),
                 ),
               ),
               const SizedBox(height: 60),
-              const Text(
-                "You can change this option later in your Settings",
-                style: TextStyle(fontSize: 23, color: Colors.black),
+              Center(
+                child: const Text(
+                  "You can change this option later in your Settings",
+                  style: TextStyle(fontSize: 23, color: Colors.black),
+                ),
               ),
               const SizedBox(
                 height: 50,

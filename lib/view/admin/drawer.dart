@@ -1,12 +1,15 @@
  
 import 'package:flutter/material.dart';
+import 'package:main_project/view/admin/Entrepreneur_details.dart';
+import 'package:main_project/view/admin/Notification_page.dart';
+import 'package:main_project/view/admin/User_details.dart';
 import 'package:main_project/view/admin/login.dart';
 
 class Drawerpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(foregroundColor: Colors.white,
         title: const Center(
             child: Text(
           'Welcome To Encanto',
@@ -17,10 +20,10 @@ class Drawerpage extends StatelessWidget {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('images/wedding-management-500x500.webp'),
-                fit: BoxFit.cover)),
+        // decoration: const BoxDecoration(
+        //     image: DecorationImage(
+        //         image: AssetImage('images/wedding-management-500x500.webp'),
+        //         fit: BoxFit.cover)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -185,9 +188,9 @@ class Drawerpage extends StatelessWidget {
               leading: const Icon(Icons.person),
               title: const Text('User details'),
               onTap: () {
-                // Navigator.of(context).push(MaterialPageRoute(
-                //   builder: (context) => const Userdetails(),
-                // ));
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) =>  Userdetails(),
+                ));
               },
             ),
             const Divider(
@@ -197,9 +200,9 @@ class Drawerpage extends StatelessWidget {
               leading: const Icon(Icons.menu_book_rounded),
               title: const Text('Entrepreneur details'),
               onTap: () {
-                // Navigator.of(context).push(MaterialPageRoute(
-                //   builder: (context) => const Entrepreneurdetails(),
-                // ));
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) =>  Entrepreneurdetails(),
+                ));
               },
             ),
             const Divider(
@@ -209,9 +212,9 @@ class Drawerpage extends StatelessWidget {
               leading: const Icon(Icons.notifications_active),
               title: const Text('Notifications'),
               onTap: () {
-                // Navigator.of(context).push(MaterialPageRoute(
-                //   builder: (context) => const NotificationPgae(),
-                // ));
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const NotificationPgae(),
+                ));
               },
             ),
             const Divider(
